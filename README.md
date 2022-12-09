@@ -1,5 +1,5 @@
 
-# BCapstone Project Data Engineer
+# Capstone Project Data Engineer
 
 ## Getting Started
 
