@@ -4,38 +4,20 @@
 ## Getting Started
 
 ### create AWS S3
-* create 4 bucket for 4 csv files  
-  - 
 
-### create database AWS RDS
-* go to aws console - RDS 
-* Provision (create) database postgreSQL 13.7R1
-
-- AQUA (Advanced Query Accelerator) turn off
-- Node type = ra3.xplus  - the smallest
-- Number of node = 1
-  - awsuser
-  - set password
-- click Associate IAM roles select 
-   - [x] LabRole and click Associate IAM roles
-- Additional configurations deselect 
-   - [ ] Use defaults
-- Network and security
-  - Default VPC
-  - VPC security groups use default
-  - Cluster subnet group use Cluster subnet group-1 (it don't have create one in Configuration > subnet group , with all available zone)
-  - leave the remaining default
-  - create cluster
-
-### create bucket AWS S3
 * go to aws console - S3 
 * create bucket
   - make sure - [x] **Block all public access** 
   - keep - [x] Disable for Bucket Versioning
   - create bucket
-### upload json to bucket
-* Json event file
-* Json path file
+
+  
+### upload csv files to bucket
+* create 4 bucket for 4 csv files  
+  - Pets
+  - Owners
+  - ProcedureDetails
+  - ProcedureHistory
 
 ### Check IAM Role for LabRole
 * go IAM
@@ -43,6 +25,9 @@
 * seach "LabRole"
 * copy ARN
 
+### create database AWS RDS
+* go to aws console - RDS 
+* Provision (create) database postgreSQL 13.7R1
 
 
 ## create table in Redshift
