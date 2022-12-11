@@ -47,7 +47,7 @@ response = redshift.create_cluster(
     EnhancedVpcRouting=False,
     AdditionalInfo='string',
     IamRoles=[
-        'arn:aws:iam::423544405765:role/myRedshiftRole',
+        '',
     ],
     MaintenanceTrackName='string',
     SnapshotScheduleIdentifier='string',
