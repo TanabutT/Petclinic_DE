@@ -21,21 +21,19 @@ cat ~/.aws/credentials
  ลงไป เราจะได้ค่าทั้ง 3 ค่าที่เราต้องการมา ตามรูปด้านล่างนี้  
 
 ### upload csv files to bucket
-* create 4 bucket for 4 csv files  
+* create bucket for csv files in "Petclinic_landing" directory 
   - Pets
   - Owners
   - ProcedureDetails
   - ProcedureHistory
 
-### Check IAM Role for LabRole
-* go IAM
-* choose Role
-* seach "LabRole"
-* copy ARN
+### Use Spark to transform csv to data and write (save) to new transfromed file 
+* Join table
+* get rid some field (column)
+* save to .parquet file in S3 in "Petclinic_cleaned" directory
+* use with Redshift or dbt later
 
-### create database AWS RDS
-* go to aws console - RDS 
-* Provision (create) database postgreSQL 13.7R1
+
 
 
 ## create table in Redshift
