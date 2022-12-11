@@ -22,7 +22,7 @@ cat ~/.aws/credentials
  * cuation! ค่า สามค่านี้ เปลี่ยนทุกๆ กี่ชั่วโมงไม่ทราบแน่ชัดเช็คจาก AWS cli เมื่อ connect ไม่ได้ 
 
 ### upload csv files to bucket
-* create bucket for csv files in "Petclinic_landing" directory 
+* create directory in bucket for csv files in "Petclinic_landing" directory 
   - Pets
   - Owners
   - ProcedureDetails
@@ -52,17 +52,44 @@ note: Airflow from upload csv to s3, read csv and transform with spark-save new 
 
 
 ## create table in Redshift
+```sh
+drop table owners cascade;
+```
 
 ```sh
-CREATE TABLE IF NOT EXISTS github_event (
-  event_id text primary key,
-  event_type text,
-  actor_login text,
-  repo_name text,
-  created_at text
-  
-)
+CREATE TABLE IF NOT EXISTS owners (
+  OwnerID text primary
+  ,Name text
+  ,Surname text
+  ,StreetAddress text
+  ,City text
+  ,State text
+  ,StateFull text
+  ,ZipCode text
+  )
 ```
+
+```sh
+COPY owners FROM 's3://petclinic13/PetClinic_landing/P9-Owners.csv'
+	ACCESS_KEY_ID 'ASIAWFHJWX4CVONJK7NB'
+	SECRET_ACCESS_KEY 'WnHSib0Br+mlz4eCTDgo2jk7Vy9HUy+na5vUcrvr'
+	SESSION_TOKEN 'FwoGZXIvYXdzEHgaDG6tRWcdu54CohnLrSLHAZ0V3MOVVmYj+OcIqnPFIb6mvobJMCuK+lyk7jRyqgduX/zVlcfava6lekGn0m1aADRWBDzDG5khFc3b5g69/nanumFdU8Lwi6WWOFQa8mdBr+we+lXGWpDmvyRfFYPxsq9QmWH38a88b2m8LZiaMR4zSrTGcmFitoPf1UIZEigKEpRN4Ri20HFR9fYYoBvlhowQxuCXTcVWQrLe5vg592hbM5+Z1P+1Mkla9WLbp2OTv3MEpYnvYOGOdwiER2eWyV3piPZcwcko6NbXnAYyLXCKQIRV093EJlKQFOF5CfICl7SO1gjqxoB/MPBOBVq/DWP2LNW1QyHOKsr6Tg=='
+	CSV
+	REGION 'us-east-1'
+```
+
+```sh
+COPY owners FROM 's3://petclinic13/cleaned_zone_parquet/owners.parquet'
+	ACCESS_KEY_ID 'ASIAWFHJWX4CVONJK7NB'
+	SECRET_ACCESS_KEY 'WnHSib0Br+mlz4eCTDgo2jk7Vy9HUy+na5vUcrvr'
+	SESSION_TOKEN 'FwoGZXIvYXdzEHgaDG6tRWcdu54CohnLrSLHAZ0V3MOVVmYj+OcIqnPFIb6mvobJMCuK+lyk7jRyqgduX/zVlcfava6lekGn0m1aADRWBDzDG5khFc3b5g69/nanumFdU8Lwi6WWOFQa8mdBr+we+lXGWpDmvyRfFYPxsq9QmWH38a88b2m8LZiaMR4zSrTGcmFitoPf1UIZEigKEpRN4Ri20HFR9fYYoBvlhowQxuCXTcVWQrLe5vg592hbM5+Z1P+1Mkla9WLbp2OTv3MEpYnvYOGOdwiER2eWyV3piPZcwcko6NbXnAYyLXCKQIRV093EJlKQFOF5CfICl7SO1gjqxoB/MPBOBVq/DWP2LNW1QyHOKsr6Tg=='
+	FORMAT AS PARQUET
+```
+
+
+
+
+
 ![AWS Redshift query console](resource/redshift_jsonpaht0.jpg)
 
 ## insert data from json with json_path

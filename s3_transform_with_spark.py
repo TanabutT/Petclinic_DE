@@ -62,7 +62,8 @@ phistory_table = spark.sql("""
         phistory
 """)
 
-pets_table.write.mode("overwrite").csv("s3a://petclinic13/pets.parquet")
-owners_table.write.mode("overwrite").csv("s3a://petclinic13/owners.parquet")
-pdetail_table.write.mode("overwrite").csv("s3a://petclinic13/pdetail.parquet")
-phistory_table.write.mode("overwrite").csv("s3a://petclinic13/phistory.parquet")
+pets_table.write.mode("overwrite").parquet("s3a://petclinic13/cleaned_zone_parquet/pets.parquet")
+owners_table.write.mode("overwrite").parquet("s3a://petclinic13/cleaned_zone_parquet/owners.parquet")
+pdetail_table.write.mode("overwrite").parquet("s3a://petclinic13/cleaned_zone_parquet/pdetail.parquet")
+phistory_table.write.mode("overwrite").parquet("s3a://petclinic13/cleaned_zone_parquet/phistory.parquet")
+print("#### write parquet file to cleaned_zone_parquet directory completed #####")

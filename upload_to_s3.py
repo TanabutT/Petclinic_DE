@@ -9,6 +9,7 @@ s3 = boto3.client('s3',
                     aws_session_token=aws_session_token)
 
 csv_files = glob.glob("PetClinicdata/*.csv")
+BUCKET_NAME = "petclinic13"
 
 # create directory "PetClinic_landing" in bucket S3
 s3.put_object(
