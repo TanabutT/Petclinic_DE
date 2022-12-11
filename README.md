@@ -27,7 +27,11 @@ cat ~/.aws/credentials
   - ProcedureDetails
   - ProcedureHistory
 
-### Use Spark to transform csv to data and write (save) to new transfromed file 
+### Use Spark to transform csv to data and write (save) to new transfromed file
+* EDA if use gitpod run this command to allow permission to create file in workspace
+    ```sh 
+    cat ~/.aws/credentials
+    ```
 * Join table
 * get rid some field (column)
 * save to .parquet file in S3 in "Petclinic_cleaned" directory
