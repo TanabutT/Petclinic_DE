@@ -11,7 +11,15 @@
   - keep - [x] Disable for Bucket Versioning
   - create bucket
 
-  
+### connect  AWS S3 with boto3
+การที่เราจะเชื่อมต่อไปยัง Amazon S3 เราจำเป็นต้องมี AWS Access Key ID และ AWS Secret Access Key ก่อน และถ้าเป็นการเชื่อมต่อแบบ temporary เราจะต้องใช้ AWS Session Token อีกค่าหนึ่งด้วย
+
+การที่เราจะได้มาทั้ง 3 ค่านั้น สามารถทำได้โดยไปที่ AWS Learner Lab ของคอร์สนี้ และที่ Terminal ให้เราพิมพ์คำสั่ง 
+```sh 
+cat ~/.aws/credentials
+```
+ ลงไป เราจะได้ค่าทั้ง 3 ค่าที่เราต้องการมา ตามรูปด้านล่างนี้  
+
 ### upload csv files to bucket
 * create 4 bucket for 4 csv files  
   - Pets
