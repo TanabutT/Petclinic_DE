@@ -16,6 +16,6 @@ conf.set("spark.hadoop.fs.s3a.session.token", AWS_SESSION_TOKEN)
 spark = SparkSession.builder.config(conf=conf).getOrCreate()
 
 
-df = spark.read.csv("s3://petclinic13/PetClinic_landing/P9-Pets.csv", header=True)
+df = spark.read.csv("s3a://petclinic13/PetClinic_landing/P9-Pets.csv", header=True)
 
 df.show()

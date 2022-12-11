@@ -40,6 +40,7 @@ cat ~/.aws/credentials
 ```sh
 docker-compose up
 ```
+ก่อนทำการ read_csv การใช้ path ชี้ไปที่ s3 ต้องใช้ แบบนี้ มีตัว "a" หลัง s3  เช่น "s3a://petclinic13/PetClinic_landing/P9-Pets.csv"
 * Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
 * get rid some field (column)
 * save to .parquet file in S3 in "Petclinic_cleaned" directory
