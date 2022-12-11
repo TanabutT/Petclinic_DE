@@ -29,13 +29,22 @@ cat ~/.aws/credentials
 
 ### Use Spark to transform csv to data and write (save) to new transfromed file
 * EDA if use gitpod run this command to allow permission to create file in workspace
-    ```sh 
-    cat ~/.aws/credentials
+    เพื่อให้เราสามารถสร้างไฟล์ได้จาก Jupyter Lab ให้รันคำสั่งด้านล่างนี้
+
+    ```sh
+    sudo chmod 777 .
     ```
-* Join table
+    แล้วค่อยรัน
+
+```sh
+docker-compose up
+```
+* Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
 * get rid some field (column)
 * save to .parquet file in S3 in "Petclinic_cleaned" directory
 * use with Redshift or dbt later
+
+note: Airflow from upload csv to s3, read csv and transform with spark-save new file to s3, redshift มาดึงไปไงดี?  แล้วเอา dbt ครอบตรงการทำ analytic จากโจทย์ เก็บ พวก sql querry
 
 
 
