@@ -73,6 +73,24 @@ On the navigation menu, choose Configurations, then choose subnet groups to disp
 
 ## create table in Redshift
 full sql_query in [sql_qureires](./sql_queries.py)  
+ใช้ psycopg2 ในการต่อ redshift ได้เลยเพราะเป็น เหมือน postgres โดยต่อ connection แบบนี้ ที่ไฟล์ [create_table.py-create_table_in_redshift](./create_tables.py)
+
+```sh
+conn = psycopg2.connect(
+        host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
+        port=5439,
+        database="petclinic",
+        user=cluster_user,
+        password=cluster_password)        
+    
+    cur = conn.cursor()
+```
+โดย 
+* default port =5439 ถ้าตอนสร้างใช้ port อื่นก็ต้องเปลี่ยน 
+* host ไปดูที่หน้า https://console.aws.amazon.com/redshift/. ไปที่ cluster และดูที่ Endpoint
+* database ดูที่ Name
+* schema จะตั้ง default เป็นชื่อ public  
+
 
 example
 drop table 
