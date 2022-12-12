@@ -12,49 +12,47 @@ redshift = boto3.client('redshift',
 response = redshift.create_cluster(
     DBName='petclinic',
     ClusterIdentifier='redshift-cluster-petclinic',
-    ClusterType='multi-node',
+    ClusterType='single-node',
     NodeType='dc2.large',
     MasterUsername=cluster_user,
     MasterUserPassword=cluster_password,
-    ClusterSecurityGroups=[
-        'string',
-    ],
-    VpcSecurityGroupIds=[
-        'string',
-    ],
-    ClusterSubnetGroupName='string',
-    AvailabilityZone='string',
-    PreferredMaintenanceWindow='string',
-    ClusterParameterGroupName='string',
-    AutomatedSnapshotRetentionPeriod=123,
-    ManualSnapshotRetentionPeriod=123,
+    # ClusterSecurityGroups=["default"],
+    VpcSecurityGroupIds=["sg-0451e739676e3d587"],
+    ClusterSubnetGroupName='',
+    AvailabilityZone='us-east-1a',
+    PreferredMaintenanceWindow='',
+    ClusterParameterGroupName='',
+    AutomatedSnapshotRetentionPeriod=1,
+    ManualSnapshotRetentionPeriod=30,
     Port=5439,
-    ClusterVersion='string',
+    ClusterVersion='',
     AllowVersionUpgrade=False,
-    NumberOfNodes=2,
+    NumberOfNodes=1,
     PubliclyAccessible=True,
     Encrypted=False,
-    HsmClientCertificateIdentifier='string',
-    HsmConfigurationIdentifier='string',
-    ElasticIp='string',
-    Tags=[
-        {
-            'Key': 'string',
-            'Value': 'string'
-        },
-    ],
-    KmsKeyId='string',
-    EnhancedVpcRouting=False,
-    AdditionalInfo='string',
-    IamRoles=[
+
+    # # HsmClientCertificateIdentifier='None',
+    # # HsmConfigurationIdentifier='None',
+    # # ElasticIp='',
+    # Tags=[
+    #     # {
+    #     #     'Key': 'string',
+    #     #     'Value': 'string'
+    #     # },
+    # ],
+    # # KmsKeyId='',
+    # EnhancedVpcRouting=False,
+    # # AdditionalInfo='',
+    # IamRoles=[
         
-    ],
-    MaintenanceTrackName='string',
-    SnapshotScheduleIdentifier='string',
-    AvailabilityZoneRelocation=False,
-    AquaConfigurationStatus='auto',
-    DefaultIamRoleArn='string',
-    LoadSampleData='string'
+    # ],
+    # MaintenanceTrackName='',
+    # SnapshotScheduleIdentifier='',
+    # AvailabilityZoneRelocation=False,
+    # AquaConfigurationStatus='auto',
+    # DefaultIamRoleArn='',
+    # LoadSampleData=''
 )
+
 
 # cannot create LabRole is not allow to access to Redshift
