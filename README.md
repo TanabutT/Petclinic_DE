@@ -36,11 +36,13 @@ cat ~/.aws/credentials
     sudo chmod 777 .
     ```
     แล้วค่อยรัน
-* Use jupyter lab to EDA and clean some raw csv file with spark (go see ipynb notebook [Petcliniccleaning.ipynb](./Petcliniccleaning.ipynb))  
+
 
 ```sh
 docker-compose up
 ```
+* Use jupyter lab to EDA and clean some raw csv file with spark (go see ipynb notebook [Petcliniccleaning.ipynb](./Petcliniccleaning.ipynb))  
+
 ก่อนทำการ read_csv การใช้ path ชี้ไปที่ s3 ต้องใช้ แบบนี้ มีตัว "a" หลัง s3  เช่น "s3a://petclinic13/PetClinic_landing/P9-Pets.csv"
 * Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
 * get rid some field (column)
