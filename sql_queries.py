@@ -114,5 +114,5 @@ drop_table_queries = [
     pets_table_drop
     ,owners_table_drop
     ,phistory_table_drop 
-    ,pdetail_push_table_drop    
+    ,pdetail_table_drop    
     ]

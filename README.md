@@ -72,10 +72,14 @@ On the navigation menu, choose Configurations, then choose subnet groups to disp
 
 
 ## create table in Redshift
+full sql_query in [sql_qureires](./sql_queries.py)  
+
+example
+drop table 
 ```sh
 drop table owners cascade;
 ```
-
+Create table owners
 ```sh
 CREATE TABLE IF NOT EXISTS owners (
   OwnerID text primary key
@@ -88,7 +92,7 @@ CREATE TABLE IF NOT EXISTS owners (
   ,ZipCode text
   )
 ```
-
+load owner table with COPY command in aws via boto3 connect using pycopg2 or redshift_connector? csv file
 ```sh
 COPY owners FROM 's3://v/P9-Owners.csv'
 	ACCESS_KEY_ID ''
@@ -98,6 +102,7 @@ COPY owners FROM 's3://v/P9-Owners.csv'
 	REGION ''
 ```
 
+load owner table with COPY command in aws via boto3 connect using pycopg2 or redshift_connector? parquet file
 ```sh
 COPY owners FROM 's3://v/owners.parquet'
 	ACCESS_KEY_ID ''

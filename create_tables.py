@@ -2,6 +2,7 @@ import psycopg2
 # separate sql queries in another file
 # import the sql queries below:
 from sql_queries import *
+from settings import cluster_user, cluster_password
 
 print("try connect to postgresdb")
 
@@ -33,10 +34,11 @@ def main():
     - Finally, closes the connection.
     """
     conn = psycopg2.connect(
-        host="localhost",
-        database="dev",
-        user="awsuser",
-        password="xxxxx")        
+        host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
+        port=5439
+        database="petclinic",
+        user=cluster_user,
+        password=cluster_password)        
     
     cur = conn.cursor()
 
