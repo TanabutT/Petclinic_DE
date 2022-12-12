@@ -35,7 +35,7 @@ def main():
     """
     conn = psycopg2.connect(
         host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
-        port=5439
+        port=5439,
         database="petclinic",
         user=cluster_user,
         password=cluster_password)        
