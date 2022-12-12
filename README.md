@@ -58,7 +58,7 @@ drop table owners cascade;
 
 ```sh
 CREATE TABLE IF NOT EXISTS owners (
-  OwnerID text primary
+  OwnerID text primary key
   ,Name text
   ,Surname text
   ,StreetAddress text
