@@ -34,9 +34,9 @@ def main():
     """
     conn = psycopg2.connect(
         host="localhost",
-        database="postgres",
-        user="postgres",
-        password="postgres")        
+        database="dev",
+        user="awsuser",
+        password="xxxxx")        
     
     cur = conn.cursor()
 
