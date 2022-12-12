@@ -15,7 +15,7 @@ response = redshift.create_cluster(
     ClusterType='multi-node',
     NodeType='dc2.large',
     MasterUsername=cluster_user,
-    MasterUserPassword=MasterUserPassword,
+    MasterUserPassword=cluster_password,
     ClusterSecurityGroups=[
         'string',
     ],
@@ -47,7 +47,7 @@ response = redshift.create_cluster(
     EnhancedVpcRouting=False,
     AdditionalInfo='string',
     IamRoles=[
-        ,
+        
     ],
     MaintenanceTrackName='string',
     SnapshotScheduleIdentifier='string',
