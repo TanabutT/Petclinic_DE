@@ -51,6 +51,26 @@ note: Airflow from upload csv to s3, read csv and transform with spark-save new 
 
 
 
+
+
+
+
+
+## create Redshift cluster
+ใช้ boto3.client('redshift').create_cluster(**kwargs) สร้าง Redshift cluster
+ดูได้ที่ ไฟล์ [create_Reshift.py](create_Readshift.py)  
+
+### หาค่า VpcSecurityGroupIds=["sg-0451e739676e3d587"] ได้ที่
+หา VPC security groups โดยไปที่ aws console at https://console.aws.amazon.com/redshift/.
+ไปที่หน้า create cluster ลงมาที่ Additional configurations เข้าไปเปิดดู Network and security และดูที่ ค่า  VPC security groups แล้วนำมาใส่
+### หาค่า ClusterParameterGroupName='default.redshift-1.0' ได้ที่
+ไปที่ aws console at https://console.aws.amazon.com/redshift/.
+On the navigation menu, choose Configurations, then choose Workload management to display the Workload management page. ดูชื่อ Parameter group ที่ต้องการใช้ ถ้าไม่มีก็สร้างใหม่
+### หาค่า ClusterSubnetGroupName='default' ได้ที่
+ไปที่ aws console at https://console.aws.amazon.com/redshift/.
+On the navigation menu, choose Configurations, then choose subnet groups to display the Cluster subnet groups. ดูชื่อ Cluster subnet groups ที่ต้องการใช้ 
+
+
 ## create table in Redshift
 ```sh
 drop table owners cascade;
