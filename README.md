@@ -36,6 +36,7 @@ cat ~/.aws/credentials
     sudo chmod 777 .
     ```
     แล้วค่อยรัน
+* Use jupyter lab to EDA and clean some raw csv file with spark (go see ipynb notebook [Petcliniccleaning.ipynb](./Petcliniccleaning.ipynb))  
 
 ```sh
 docker-compose up
