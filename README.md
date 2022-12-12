@@ -93,7 +93,7 @@ conn = psycopg2.connect(
 * host ไปดูที่หน้า https://console.aws.amazon.com/redshift/. ไปที่ cluster และดูที่ Endpoint 
   - ซึ่งจะได้มา redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com:5439-petclinic
   - ให้ตัดมาแค่ ถึง .com  แค่นี้ redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com ไปใส่
-* database ดูที่ Name
+* database ดูที่ Name ในที่นี้ตั้งชื่อว่า petclinic
 * schema จะตั้ง default เป็นชื่อ public  
 
 
