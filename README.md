@@ -87,7 +87,9 @@ conn = psycopg2.connect(
 ```
 โดย 
 * default port =5439 ถ้าตอนสร้างใช้ port อื่นก็ต้องเปลี่ยน 
-* host ไปดูที่หน้า https://console.aws.amazon.com/redshift/. ไปที่ cluster และดูที่ Endpoint
+* host ไปดูที่หน้า https://console.aws.amazon.com/redshift/. ไปที่ cluster และดูที่ Endpoint 
+  - ซึ่งจะได้มา redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com:5439-petclinic
+  - ให้ตัดมาแค่ ถึง .com  แค่นี้ redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com ไปใส่
 * database ดูที่ Name
 * schema จะตั้ง default เป็นชื่อ public  
 
