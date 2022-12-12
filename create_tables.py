@@ -24,6 +24,16 @@ def create_tables(cur, conn) -> None:
         conn.commit()
 
 
+def loadinto_tables(cur, conn) -> None:
+    """
+    Creates each table using the queries in `create_table_queries` list.
+    """
+    for query in loadinto_table_queries:
+        cur.execute(query)
+        conn.commit()
+
+
+
 def main():
     """
     - Drops (if exists) and Creates the sparkify database.
@@ -44,6 +54,7 @@ def main():
 
     drop_tables(cur, conn)
     create_tables(cur, conn)
+    loadinto_tables(cur, conn)
 
     conn.close()
     print("connection close")

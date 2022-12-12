@@ -18,14 +18,16 @@ sql="""CREATE TABLE IF NOT EXISTS owners12345
 );
 """
 
-# cur = conn.cursor()
-# cur.execute("select ownerid, name from owners")
-# result: tuple = cur.fetchall()
-# print(result)
-# conn.close() 
+sql1 = "select * from phistory limit 10;"
 
 cur = conn.cursor()
-cur.execute(sql)
-conn.commit()
+cur.execute(sql1)
+result: tuple = cur.fetchall()
+print(result)
+conn.close() 
+
+# cur = conn.cursor()
+# cur.execute(sql)
+# conn.commit()
 
 

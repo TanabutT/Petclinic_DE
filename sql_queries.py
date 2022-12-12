@@ -40,17 +40,11 @@ pdetail_table_create = """CREATE TABLE IF NOT EXISTS pdetail
 
 pets_table_create = """CREATE TABLE IF NOT EXISTS pets
  (
-    --id INT NOT NULL AUTO_INCREMENT,
     PetID text 
     ,Kind text
     ,Gender text
     ,Age text
-    ,OwnerID text    
-    --PRIMARY KEY (PetID),
-    --CONSTRAINT FK_petowner FOREIGN KEY (OwnerID) REFERENCES owners(OwnerID),
-    --CONSTRAINT FK_petprocedure KEY (PetID) REFERENCES phistory(PetID),
-    --CONSTRAINT FK_payload_push_event FOREIGN KEY (payload_push_id) REFERENCES dim_payload_push(push_id),
-    --CONSTRAINT FK_org_event FOREIGN KEY (org_id) REFERENCES dim_org(org_id)
+    ,OwnerID text  
 );
 
  """
@@ -60,29 +54,29 @@ pets_table_create = """CREATE TABLE IF NOT EXISTS pets
 
 # INSERT RECORDS
 # COPY s3 to Redshift
-load_owners = """COPY owners FROM 's3://petclinic13/cleaned_zone_parquet/owners.parquet'
-	ACCESS_KEY_ID %s
-	SECRET_ACCESS_KEY %s
-	SESSION_TOKEN %s
-	FORMAT AS PARQUET""" % ( aws_access_key_id , aws_secret_access_key , aws_session_token)
+load_owners = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/owners.parquet'
+	ACCESS_KEY_ID '%s'
+	SECRET_ACCESS_KEY '%s'
+	SESSION_TOKEN '%s'
+	FORMAT AS PARQUET""" % ( 'owners', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_phistory = """COPY owners FROM 's3://petclinic13/cleaned_zone_parquet/phistory.parquet'
-	ACCESS_KEY_ID %s
-	SECRET_ACCESS_KEY %s
-	SESSION_TOKEN %s
-	FORMAT AS PARQUET""" % ( aws_access_key_id , aws_secret_access_key , aws_session_token)
+load_phistory = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/phistory.parquet'
+	ACCESS_KEY_ID '%s'
+	SECRET_ACCESS_KEY '%s'
+	SESSION_TOKEN '%s'
+	FORMAT AS PARQUET""" % ( 'phistory', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_pdetail = """COPY owners FROM 's3://petclinic13/cleaned_zone_parquet/pdetail.parquet'
-	ACCESS_KEY_ID %s
-	SECRET_ACCESS_KEY %s
-	SESSION_TOKEN %s
-	FORMAT AS PARQUET""" % ( aws_access_key_id , aws_secret_access_key , aws_session_token)
+load_pdetail = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pdetail.parquet'
+	ACCESS_KEY_ID '%s'
+	SECRET_ACCESS_KEY '%s'
+	SESSION_TOKEN '%s'
+	FORMAT AS PARQUET""" % ( 'pdetail', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_pets = """COPY owners FROM 's3://petclinic13/cleaned_zone_parquet/pets.parquet'
-	ACCESS_KEY_ID %s
-	SECRET_ACCESS_KEY %s
-	SESSION_TOKEN %s
-	FORMAT AS PARQUET""" % ( aws_access_key_id , aws_secret_access_key , aws_session_token)
+load_pets = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pets.parquet'
+	ACCESS_KEY_ID '%s'
+	SECRET_ACCESS_KEY '%s'
+	SESSION_TOKEN '%s'
+	FORMAT AS PARQUET""" % ( 'pets', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
 
 # QUERY LISTS
