@@ -10,6 +10,22 @@ python -m venv ENV
 source ENV/bin/activate
 pip install -r requirements.txt
 ```
+## Creating and Scheduling Data Pipelines
+
+ถ้าใช้งานระบบที่เป็น Linux ให้เรารันคำสั่งด้านล่างนี้ก่อน
+
+```sh
+mkdir -p ./dags ./logs ./plugins
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+```
+
+หลังจากนั้นให้รัน
+
+```sh
+docker-compose up -d
+```
+
+
 
 ### create AWS S3
 
