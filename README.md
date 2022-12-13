@@ -46,11 +46,14 @@ cat ~/.aws/credentials
     ```
     แล้วค่อยรัน
 
+
 ```sh
 docker-compose up
 ```
 เข้าไปดู การ transformation data in ipynb notebook ที่ ไฟล์ [Petcliniccleaning](./resource/Petcliniccleaning.ipynb)
 ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [sss](./s3_transform_with_spark.py) แทน
+
+* Use jupyter lab to EDA and clean some raw csv file with spark (go see ipynb notebook [Petcliniccleaning.ipynb](./Petcliniccleaning.ipynb))  
 
 ก่อนทำการ read_csv การใช้ path ชี้ไปที่ s3 ต้องใช้ แบบนี้ มีตัว "a" หลัง s3  เช่น "s3a://petclinic13/PetClinic_landing/P9-Pets.csv"
 * Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
@@ -85,6 +88,26 @@ On the navigation menu, choose Configurations, then choose subnet groups to disp
 
 ## create table in Redshift
 full sql_query in [sql_qureires](./sql_queries.py)  
+ใช้ psycopg2 ในการต่อ redshift ได้เลยเพราะเป็น เหมือน postgres โดยต่อ connection แบบนี้ ที่ไฟล์ [create_table.py-create_table_in_redshift](./create_tables.py)
+
+```sh
+conn = psycopg2.connect(
+        host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
+        port=5439,
+        database="petclinic",
+        user=cluster_user,
+        password=cluster_password)        
+    
+    cur = conn.cursor()
+```
+โดย 
+* default port =5439 ถ้าตอนสร้างใช้ port อื่นก็ต้องเปลี่ยน 
+* host ไปดูที่หน้า https://console.aws.amazon.com/redshift/. ไปที่ cluster และดูที่ Endpoint 
+  - ซึ่งจะได้มา redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com:5439-petclinic
+  - ให้ตัดมาแค่ ถึง .com  แค่นี้ redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com ไปใส่
+* database ดูที่ Name ในที่นี้ตั้งชื่อว่า petclinic
+* schema จะตั้ง default เป็นชื่อ public  
+
 
 example
 drop table 
