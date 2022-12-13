@@ -1,7 +1,15 @@
 
 # Capstone Project Data Engineer
 
-## Getting Started
+## Getting Started linux
+ENV is name of virtual environment can name up to user 
+example CUTECAT then 
+source CUTECAT/bin/active
+```sh
+python -m venv ENV
+source ENV/bin/activate
+pip install -r requirements.txt
+```
 
 ### create AWS S3
 
@@ -29,6 +37,7 @@ cat ~/.aws/credentials
   - ProcedureHistory
 
 ### Use Spark to transform csv to data and write (save) to new transfromed file
+* cd เข้าไปที่ folder resource ก่อน
 * EDA if use gitpod run this command to allow permission to create file in workspace
     เพื่อให้เราสามารถสร้างไฟล์ได้จาก Jupyter Lab ให้รันคำสั่งด้านล่างนี้
 
@@ -40,6 +49,9 @@ cat ~/.aws/credentials
 ```sh
 docker-compose up
 ```
+เข้าไปดู การ transformation data in ipynb notebook ที่ ไฟล์ [Petcliniccleaning](./resource/Petcliniccleaning.ipynb)
+ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [sss](./s3_transform_with_spark.py) แทน
+
 ก่อนทำการ read_csv การใช้ path ชี้ไปที่ s3 ต้องใช้ แบบนี้ มีตัว "a" หลัง s3  เช่น "s3a://petclinic13/PetClinic_landing/P9-Pets.csv"
 * Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
 * get rid some field (column)
