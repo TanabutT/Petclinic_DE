@@ -50,7 +50,7 @@ cat ~/.aws/credentials
 docker-compose up
 ```
 เข้าไปดู การ transformation data in ipynb notebook ที่ ไฟล์ [Petcliniccleaning](./resource/Petcliniccleaning.ipynb)
-ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [sss](./s3_transform_with_spark.py) แทน
+ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [s3_transform_with_spark.py](./s3_transform_with_spark.py) แทน
 
 ก่อนทำการ read_csv การใช้ path ชี้ไปที่ s3 ต้องใช้ แบบนี้ มีตัว "a" หลัง s3  เช่น "s3a://petclinic13/PetClinic_landing/P9-Pets.csv"
 * Join table or just clean ค่อยใช้ dbt ครอบแล้วjoin sql เอาจะได้เห็น lineage graph
