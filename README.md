@@ -51,7 +51,7 @@ cat ~/.aws/credentials
 docker-compose up
 ```
 เข้าไปดู การ transformation data in ipynb notebook ที่ ไฟล์ [Petcliniccleaning](./resource/Petcliniccleaning.ipynb)
-ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [sss](./s3_transform_with_spark.py) แทน
+ใน pipeline ทั้งหมดจะไปทำใน ไฟล์ [s3_transform_with_spark.py](./s3_transform_with_spark.py) แทน
 
 * Use jupyter lab to EDA and clean some raw csv file with spark (go see ipynb notebook [Petcliniccleaning.ipynb](./Petcliniccleaning.ipynb))  
 
