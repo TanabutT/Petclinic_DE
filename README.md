@@ -161,14 +161,18 @@ COPY owners FROM 's3://v/owners.parquet'
 	SESSION_TOKEN ''
 	FORMAT AS PARQUET
 ```
+หลัง run จะเป็นการ drop table , create table , and load data into table พร้อมที่จะทำการ ต่อกับ dbt ต่อไป
+
+[](./resource/drop-create-loadinto-cluster.png)
 
 
 
 
-
-![AWS Redshift query console](resource/redshift_jsonpaht0.jpg)
-
-## insert data from json with json_path
+## dbt connect with redshift
+### install dbt core and dbt redshift
+```sh
+pip install dbt-core dbt redshift
+```
 
 ```sh
 copy github_event
