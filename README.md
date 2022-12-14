@@ -171,7 +171,7 @@ COPY owners FROM 's3://v/owners.parquet'
 ## dbt connect with redshift
 ### install dbt core and dbt redshift
 ```sh
-pip install dbt-core dbt redshift
+pip install dbt-core dbt-redshift
 ```
 
 ```sh
