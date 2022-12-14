@@ -163,7 +163,7 @@ COPY owners FROM 's3://v/owners.parquet'
 ```
 หลัง run จะเป็นการ drop table , create table , and load data into table พร้อมที่จะทำการ ต่อกับ dbt ต่อไป
 
-[cluster-loaded with table from parquet file in S3](./resource/drop-create-loadinto-cluster.png)
+![cluster-loaded with table from parquet file in S3](./resource/drop-create-loadinto-cluster.png)
 
 
 
