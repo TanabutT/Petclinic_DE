@@ -230,22 +230,29 @@ from pic here see stg_pets myfirstdbtmodel mysecondbtmodel are there
 query form stg_pets and run success too.  
 
 
-To show data in table github_event:
-
+### relationship from dbt
+สร้าง doc ใน dbt จากคำสั่ง 
 
 ```sh
-select * from github_event
+dbt docs generate
 ```
-see the result in 
-[github_event_query_result.csv](github_event_query_result.csv)
+และ run  
 
-example result
-| event_id	  |   event_type      |actor_login  |	repo_name	                    | created_at           |
-| :---        |   :---            |:---:        |:---:                          | ---:                 |
-|23487929637  |	IssueCommentEvent	|  sukhada	  |350org/ak_intl_v3	            | 2022-08-17T15:51:05Z |
-|23487929676	|PushEvent	        |  yousabu	  |yousabu/ansible_rhce	          | 2022-08-17T15:51:05Z |
-|23487929674	|PushEvent	        |  MathisGD	  |morpho-dao/morpho-utils        |	2022-08-17T15:51:05Z |
-|23487929661	|PushEvent	        |  BR-Junior	|BR-Junior/crud-com-vue-e-quasar|2022-08-17T15:51:05Z  |
+```sh
+dbt docs serve
+```
+ไปกดที่ขวาล่าง สามารถดู lineage graph ของ datawarehouse ของเราได้
+
+![dbt_docs_serve_page>localhost:8080](./resource/dbt_docs_serve_page.png)
+![page>lineage_graph](./resource/lineage_graph_example_nomodel.png)
+
+
+
+
+
+
+
+
 
 To close all service
 - S3 empty bucket
