@@ -173,15 +173,63 @@ COPY owners FROM 's3://v/owners.parquet'
 ```sh
 pip install dbt-core dbt-redshift
 ```
+### start dbt project connect with redshift cluster
+```sh
+dbt init
+```
+- ตั้งชื่อ project = dbt_connect_redshift
+- choose number to pick redshift
+- hostname ใช้ endpoint redshift cluster ตัด ตัวหลัง .com ออก (ที่เป็น port กับชื่อ database name)
+- port default 5439 ถ้าเปลี่ยนก็พิมพ์ตามที่ตั้ง
+ี- user ของ cluster 
+- password ใส่ของ cluster
+- dbname ดูใน cluster detail เลย ที่นี้ ชื่อ petclinic
+- schema ดูหน้า query ชื่อ public  
+
+สำเร็จจะขึ้นแบบนี้  
 
 ```sh
-copy github_event
-from 's3://tanabruce-bucket06092022/github_events_01.json'
-iam_role 'arn:aws:iam::423544405765:role/LabRole' 
-json 's3://tanabruce-bucket06092022/events_json_path.json';
+Your new dbt project "dbt_connect_redshift" was created!
+Happy modeling!
+```
+และจะสร้าง ตัว folder ชื่อ dbt project ที่เราตั้งไปตะกี้
+ลองเข้าไปที่ dbt profile นั้น (ซึ่งจะสร้างครอบอยู่นอก  workspace directory ของตัว project Petclinic_DE เลย) เพราะ ~/ เป็นการออกไป home directory แล้วเข้า folder .dbt ที่เก็บ profile.yml อยู่
+
+```sh
+code ~/.dbt/profiles.yml
+```
+ลงมาล่างสุดดู รายละเอียดการ connection ต่อกับ redshift  
+
+
+* ต่อมาต้องเข้าไปที่ folder dbt project ที่ทำไว้แล้ว 
+```sh
+cd dbt_connect_redshift
 ```
 
+แล้วลอง run ทดสอบว่า ระบบต่างๆ dbt ok (file dbt_project.yml ok มั้ย และ file profiles.yml ok หรือไม่)
+```sh
+dbt debug 
+```
+ถ้าผ่านจะขึ้นแบบนี้
+![dbt debug passed](./resource/dbt_debug_in_folder_pass.png)
+
+### build new model in dbt
+go in to model folder 
+* create new sql file for new query or make staging table from existing table in cluster
+  - try stg_pet.sql
+    ```sh 
+    select * from pets
+    ```
+* when new sql files are made run
+```sh
+dbt run 
+```
+* go check (view) table or table depend on config dbt in the cluster query page in redshift cluster
+![myfirstdbtmodel-and-stg_pet-new-model-create](./resource/dbt_run_stg_pest_created_N_query.png)
+
+
 To show data in table github_event:
+
 
 ```sh
 select * from github_event
