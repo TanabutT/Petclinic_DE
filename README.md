@@ -225,7 +225,9 @@ go in to model folder
 dbt run 
 ```
 * go check (view) table or table depend on config dbt in the cluster query page in redshift cluster
-![myfirstdbtmodel-and-stg_pet-new-model-create](./resource/dbt_run_stg_pest_created_N_query.png)
+![myfirstdbtmodel-and-stg_pets-new-model-create](./resource/dbt_run_stg_pest_created_N_query.png)
+from pic here see stg_pets myfirstdbtmodel mysecondbtmodel are there  
+query form stg_pets and run success too.  
 
 
 To show data in table github_event:
