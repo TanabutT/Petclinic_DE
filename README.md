@@ -231,6 +231,7 @@ query form stg_pets and run success too.
 
 
 ### relationship from dbt
+เมื่อลองทำ datawarehouse และ staging table ไว้ใช้งานแล้ว สามารถสร้าง docs ไว้ได้ 
 สร้าง doc ใน dbt จากคำสั่ง 
 
 ```sh
@@ -241,6 +242,7 @@ dbt docs generate
 ```sh
 dbt docs serve
 ```
+
 ไปกดที่ขวาล่าง สามารถดู lineage graph ของ datawarehouse ของเราได้
 
 ![dbt_docs_serve_page>localhost:8080](./resource/dbt_docs_serve_page.png)
