@@ -1,3 +1,4 @@
 /ENV
 settings.py
 /logs
+/dags/settings_dags.py

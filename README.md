@@ -45,7 +45,7 @@ cat ~/.aws/credentials
  ลงไป เราจะได้ค่าทั้ง 3 ค่าที่เราต้องการมา 
  * cuation! ค่า สามค่านี้ เปลี่ยนทุกๆ กี่ชั่วโมงไม่ทราบแน่ชัดเช็คจาก AWS cli เมื่อ connect ไม่ได้ 
 
-### upload csv files to bucket
+### upload csv files to bucket using airflow schedule data flow pipeline
 * create directory in bucket for csv files in "Petclinic_landing" directory 
   - Pets
   - Owners
