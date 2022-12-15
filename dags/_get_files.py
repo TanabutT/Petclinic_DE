@@ -17,5 +17,6 @@ def _get_files(filepath: str) -> List[str]:
     num_files = len(all_files)
     print(f"{num_files} files found in {filepath}")
     # print( "filename here : ", *[fname.split("/")[-1] for fname in all_files])
+    print(all_files)
 
     return all_files

@@ -8,11 +8,11 @@ def _con_upload_to_s3(**context):
     to get data whice require to transfer from local to s3 bucket
     """
     # connect s3 with python by boto3
-    s3 = boto3.client('s3',
-                    region_name='us-east-1',
-                    aws_access_key_id=aws_access_key_id,
-                    aws_secret_access_key=aws_secret_access_key,
-                    aws_session_token=aws_session_token)
+    # s3 = boto3.client('s3',
+    #                 region_name='us-east-1',
+    #                 aws_access_key_id=aws_access_key_id,
+    #                 aws_secret_access_key=aws_secret_access_key,
+    #                 aws_session_token=aws_session_token)
 
     ti = context["ti"]
 
@@ -26,23 +26,23 @@ def _con_upload_to_s3(**context):
     print("ti : ", ti)
 
 
-    # create directory "PetClinic_landing" in bucket S3
-    BUCKET_NAME = "petclinic13"
+    # # create directory "PetClinic_landing" in bucket S3
+    # BUCKET_NAME = "petclinic13"
 
-    s3.put_object(
-        Bucket=BUCKET_NAME,
-        Body='',
-        Key='PetClinic_landing/'
-        )
+    # s3.put_object(
+    #     Bucket=BUCKET_NAME,
+    #     Body='',
+    #     Key='PetClinic_landing/'
+    #     )
 
-    # upload filen to directory in bucket S3
-    for filename in all_files:
-        print("Putting %s" % filename)
-        # s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("\\")[1]) # for os window
-        s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("/")[1]) # for os linux
+    # # upload filen to directory in bucket S3
+    # for filename in all_files:
+    #     print("Putting %s" % filename)
+    #     # s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("\\")[1]) # for os window
+    #     s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("/")[1]) # for os linux
 
-    #list file in bucket after upload
-    response = s3.list_objects(  Bucket='petclinic13',   
-                            MaxKeys=4)  
-                            # Prefix='P9')
-    print(response)
+    # #list file in bucket after upload
+    # response = s3.list_objects(  Bucket='petclinic13',   
+    #                         MaxKeys=4)  
+    #                         # Prefix='P9')
+    # print(response)
