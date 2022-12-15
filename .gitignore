@@ -2,3 +2,4 @@
 settings.py
 /logs
 /dags/settings_dags.py
+/dags/__pycache__
