@@ -40,4 +40,7 @@ with DAG (
         python_callable=_s3_transform_with_spark,
     ) 
 
+     #create_Redshift first 
     get_files >> con_upload_to_s3 >> _s3_transform_with_spark
+
+    #create_Redshift >> sleep for 5 min >> create_table 

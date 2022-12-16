@@ -1,6 +1,6 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
-from settings import aws_access_key_id , aws_secret_access_key , aws_session_token
+from settings_dags import aws_access_key_id , aws_secret_access_key , aws_session_token
 
 def _s3_transform_with_spark():
     """
