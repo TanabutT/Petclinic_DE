@@ -44,7 +44,7 @@ def _con_upload_to_s3(**context):
     for filename in all_files:
         print("Putting %s" % filename)
         #check filename to keep in s3 after split()
-        print("Putting %s" % filename.split("/")[-1]))
+        print("Putting %s" % filename.split("/")[-1])
         # s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("\\")[1]) # for os window
         s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("/")[-1]) # for os linux
 
