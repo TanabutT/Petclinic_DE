@@ -22,7 +22,7 @@ s3.put_object(
 for filename in csv_files:
     print("Putting %s" % filename)
     # s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("\\")[1]) # for os window
-    s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("/")[1]) # for os linux
+    s3.upload_file(filename, BUCKET_NAME, 'PetClinic_landing/' + filename.split("/")[-1]) # for os linux
 
 # s3.upload_file(  Filename='PetClinicdata\P9-ProceduresDetails.csv',
 #                     Bucket='petclinic13',   

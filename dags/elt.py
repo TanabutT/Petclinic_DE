@@ -39,4 +39,4 @@ with DAG (
         python_callable=_con_upload_to_s3,
     ) 
 
-    get_files >> con_upload_to_s3 
+    get_files >> con_upload_to_s3
