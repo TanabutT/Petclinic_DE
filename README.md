@@ -213,7 +213,7 @@ code ~/.dbt/profiles.yml
 cd dbt_connect_redshift
 ```
 
-แล้วลอง run ทดสอบว่า ระบบต่างๆ dbt ok (file dbt_project.yml ok มั้ย และ file profiles.yml ok หรือไม่)
+แล้วลอง run dbt debug ทดสอบว่า ระบบต่างๆ dbt ok (file dbt_project.yml ok มั้ย และ file profiles.yml ok หรือไม่)
 ```sh
 dbt debug 
 ```
@@ -221,13 +221,13 @@ dbt debug
 ![dbt debug passed](./resource/dbt_debug_in_folder_pass.png)
 
 ### build new model in dbt
-go in to model folder 
+go in by click into dbt_connect_redshift/model/ folder 
 * create new sql file for new query or make staging table from existing table in cluster
   - try stg_pet.sql
     ```sh 
     select * from pets
     ```
-* when new sql files are made run
+* when new sql files are made run (dbt will build the new table table)
 ```sh
 dbt run 
 ```
@@ -247,7 +247,7 @@ dbt docs generate
 และ run  
 
 ```sh
-dbt docs serve
+dbt docs serve --port 8089
 ```
 
 ไปกดที่ขวาล่าง สามารถดู lineage graph ของ datawarehouse ของเราได้

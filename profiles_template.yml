@@ -1,0 +1,12 @@
+dbt_connect_redshift:
+  outputs:
+    dev:
+      dbname: petclinic
+      host: xxx.yyyyy.us-east-1.redshift.amazonaws.com
+      password: xxx
+      port: 5439
+      schema: public
+      threads: 1
+      type: redshift
+      user: awsuser
+  target: dev
