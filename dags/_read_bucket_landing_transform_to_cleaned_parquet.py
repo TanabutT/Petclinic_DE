@@ -54,30 +54,30 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     # print(pets_df.drop(columns=["Name"]))
 
     # clean and transform to parquet
-    pets_key_pq = "Pets.parquet"
-    owners_key_pq = "Owners.parquet"
-    pdetail_key_pq = "pdetails.parquet"
-    phistory_key_pq = "phistory.parquet"
+    pets_key_pq = "Pets.csv"
+    owners_key_pq = "Owners.csv"
+    pdetail_key_pq = "pdetails.csv"
+    phistory_key_pq = "phistory.csv"
 
-    pets_df.drop(columns=["Name"]).to_parquet(f"s3://{AWS_S3_BUCKET_cleaned}/{pets_key_pq}",
+    pets_df.drop(columns=["Name"]).to_csv(f"s3://{AWS_S3_BUCKET_cleaned}/{pets_key_pq}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },index=False)
-    owners_df.to_parquet(f"s3://{AWS_S3_BUCKET_cleaned}/{owners_key_pq}",
+    owners_df.to_csv(f"s3://{AWS_S3_BUCKET_cleaned}/{owners_key_pq}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },index=False)
-    pdetail_df.to_parquet(f"s3://{AWS_S3_BUCKET_cleaned}/{pdetail_key_pq}",
+    pdetail_df.to_csv(f"s3://{AWS_S3_BUCKET_cleaned}/{pdetail_key_pq}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },index=False)
-    phistory_df.to_parquet(f"s3://{AWS_S3_BUCKET_cleaned}/{phistory_key_pq}",
+    phistory_df.to_csv(f"s3://{AWS_S3_BUCKET_cleaned}/{phistory_key_pq}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,

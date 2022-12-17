@@ -1,10 +1,11 @@
 import psycopg2
+import boto3
 # separate sql queries in another file
 # import the sql queries below:
 from sql_queries import *
 from settings_dags import cluster_user, cluster_password
 
-def _create_tables_process():
+def _create_tables_process(**context):
 
     # print("try connect to postgresdb")
 
@@ -52,10 +53,15 @@ def _create_tables_process():
                         aws_secret_access_key=aws_secret_access_key,
                         aws_session_token=aws_session_token)
     
-    
+    ti = context["ti"]
+    # Get list of files from filepath
+    ClusterEndpoint = ti.xcom_pull(task_ids="describe_cluster", key="return_value")
+    print("ClusterEndpoint to  fill in response: ", ClusterEndpoint)
+    """ClusterEndpoint will return "endpoint" after cluster was created"""
     
     conn = psycopg2.connect(
-        host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
+        # host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
+        host=ClusterEndpoint,
         port=5439,
         database="petclinic",
         user=cluster_user,
@@ -65,7 +71,7 @@ def _create_tables_process():
 
     drop_tables(cur, conn)
     create_tables(cur, conn)
-    loadinto_tables(cur, conn)
+    # loadinto_tables(cur, conn)
 
     conn.close()
     print("connection close")

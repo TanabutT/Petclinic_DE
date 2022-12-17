@@ -24,8 +24,15 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```sh
 docker-compose up -d
 ```
-
-
+### Access AWS cli
+* FIrst of all get:
+  - aws_access_key_id = "xxxxxxxxxxxxxxxxxx"
+  - aws_secret_access_key = "xxxxxxxxxxxxxxxxxx"
+  - aws_session_token = "xxxxxxxxxxxxxxxxxx"
+with the command here
+```sh 
+cat ~/.aws/credentials
+```
 
 ### create AWS S3
 

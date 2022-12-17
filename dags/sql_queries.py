@@ -25,7 +25,7 @@ phistory_table_create = ("""CREATE TABLE IF NOT EXISTS phistory(
     ,Date text
     ,ProcedureType text
     ,ProcedureSubcode text
-    ,PRIMARY KEY(ProcedureType, ProcedureSubcode)
+    
 );
 """)
 
@@ -35,7 +35,7 @@ pdetail_table_create = """CREATE TABLE IF NOT EXISTS pdetail
     ,ProcedureSubcode text
     ,Description text
     ,Price text 
-    ,PRIMARY KEY(ProcedureType, ProcedureSubcode)
+    
 );
 """
 
@@ -55,25 +55,25 @@ pets_table_create = """CREATE TABLE IF NOT EXISTS pets
 
 # INSERT RECORDS
 # COPY s3 to Redshift
-load_owners = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/owners.parquet'
+load_owners = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/owners.csv'
 	ACCESS_KEY_ID '%s'
 	SECRET_ACCESS_KEY '%s'
 	SESSION_TOKEN '%s'
 	FORMAT AS PARQUET""" % ( 'owners', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_phistory = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/phistory.parquet'
+load_phistory = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/phistory.csv'
 	ACCESS_KEY_ID '%s'
 	SECRET_ACCESS_KEY '%s'
 	SESSION_TOKEN '%s'
 	FORMAT AS PARQUET""" % ( 'phistory', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_pdetail = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pdetail.parquet'
+load_pdetail = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pdetail.csv'
 	ACCESS_KEY_ID '%s'
 	SECRET_ACCESS_KEY '%s'
 	SESSION_TOKEN '%s'
 	FORMAT AS PARQUET""" % ( 'pdetail', aws_access_key_id , aws_secret_access_key , aws_session_token)
 
-load_pets = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pets.parquet'
+load_pets = """COPY %s FROM 's3://petclinic13/cleaned_zone_parquet/pets.csv'
 	ACCESS_KEY_ID '%s'
 	SECRET_ACCESS_KEY '%s'
 	SESSION_TOKEN '%s'

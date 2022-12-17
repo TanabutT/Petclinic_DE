@@ -11,9 +11,10 @@ def _create_Redshift():
                         aws_secret_access_key=aws_secret_access_key,
                         aws_session_token=aws_session_token)
 
+    ClusterIdentifier = "redshift-cluster-petclinic"
     response = redshift.create_cluster(
         DBName='petclinic',
-        ClusterIdentifier='redshift-cluster-petclinic1',
+        ClusterIdentifier=ClusterIdentifier,
         ClusterType='single-node',
         NodeType='dc2.large',
         MasterUsername=cluster_user,
@@ -57,10 +58,10 @@ def _create_Redshift():
 
     )
     #return of response is Dict need to convert to list
-    ClusterIdentifier = response['Clusters'][0]['ClusterIdentifier']
-    ClusterEndpoint = response['Clusters'][0]['Endpoint']['Address']
+    # ClusterIdentifier = response['Clusters'][0]['ClusterIdentifier']
+    # ClusterEndpoint = response['Clusters'][0]['Endpoint']['Address']
 
-    return ClusterEndpoint 
+    return  ClusterIdentifier
 
 
 # cannot create LabRole is not allow to access to Redshift
