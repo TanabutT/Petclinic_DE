@@ -9,7 +9,7 @@ pdetail_table_drop = "DROP TABLE IF EXISTS pdetail CASCADE;"
 
 # CREATE TABLES
 owners_table_create = ("""CREATE TABLE IF NOT EXISTS owners( 
-     OwnerID text 
+     OwnerID text primary key
     ,Name text
     ,Surname text
     ,StreetAddress text
@@ -25,22 +25,23 @@ phistory_table_create = ("""CREATE TABLE IF NOT EXISTS phistory(
     ,Date text
     ,ProcedureType text
     ,ProcedureSubcode text
+    ,PRIMARY KEY(ProcedureType, ProcedureSubcode)
 );
 """)
 
 pdetail_table_create = """CREATE TABLE IF NOT EXISTS pdetail 
  (
-    ProcedureType text
+    ProcedureType text 
     ,ProcedureSubcode text
     ,Description text
     ,Price text 
-    --PRIMARY KEY (ProcedureType)
+    ,PRIMARY KEY(ProcedureType, ProcedureSubcode)
 );
 """
 
 pets_table_create = """CREATE TABLE IF NOT EXISTS pets
  (
-    PetID text 
+    PetID text primary key
     ,Kind text
     ,Gender text
     ,Age text

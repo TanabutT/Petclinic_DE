@@ -1,4 +1,6 @@
 import boto3
+import pickle
+from datetime import datetime
 from settings_dags import * 
 
 def _create_Redshift():  
@@ -11,7 +13,7 @@ def _create_Redshift():
 
     response = redshift.create_cluster(
         DBName='petclinic',
-        ClusterIdentifier='redshift-cluster-petclinic',
+        ClusterIdentifier='redshift-cluster-petclinic1',
         ClusterType='single-node',
         NodeType='dc2.large',
         MasterUsername=cluster_user,
@@ -29,7 +31,7 @@ def _create_Redshift():
         AllowVersionUpgrade=False,
         NumberOfNodes=1,
         PubliclyAccessible=True,
-        Encrypted=False,
+        Encrypted=False
 
         # # HsmClientCertificateIdentifier='None',
         # # HsmConfigurationIdentifier='None',
@@ -52,7 +54,13 @@ def _create_Redshift():
         # AquaConfigurationStatus='auto',
         # DefaultIamRoleArn='',
         # LoadSampleData=''
+
     )
+    #return of response is Dict need to convert to list
+    ClusterIdentifier = response['Clusters'][0]['ClusterIdentifier']
+    ClusterEndpoint = response['Clusters'][0]['Endpoint']['Address']
+
+    return ClusterEndpoint 
 
 
 # cannot create LabRole is not allow to access to Redshift

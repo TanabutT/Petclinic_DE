@@ -6,7 +6,7 @@ from settings_dags import cluster_user, cluster_password
 
 def _create_tables_process():
 
-    print("try connect to postgresdb")
+    # print("try connect to postgresdb")
 
     def drop_tables(cur, conn) -> None:
         """
@@ -45,6 +45,15 @@ def _create_tables_process():
         - Creates all tables needed.
         - Finally, closes the connection.
         """
+    redshift = boto3.client('redshift',
+
+                        region_name='us-east-1',
+                        aws_access_key_id=aws_access_key_id,
+                        aws_secret_access_key=aws_secret_access_key,
+                        aws_session_token=aws_session_token)
+    
+    
+    
     conn = psycopg2.connect(
         host="redshift-cluster-petclinic.cnrhltyzddie.us-east-1.redshift.amazonaws.com",
         port=5439,

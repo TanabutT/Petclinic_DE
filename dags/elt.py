@@ -33,11 +33,11 @@ with DAG (
         }
     )
 
-    # create_Redshift = PythonOperator(
-    #     task_id="create_Redshift",
-    #     python_callable=_create_Redshift,
+    create_Redshift = PythonOperator(
+        task_id="create_Redshift",
+        python_callable=_create_Redshift,
         
-    # )
+    )
   
     con_upload_to_s3 = PythonOperator(
         task_id="con_upload_to_s3",
@@ -58,16 +58,19 @@ with DAG (
         aws_conn_id='redshift_petclinic' # input connections at admin section in airflow ui and put here
     )
 
-    # process_table = PythonOperator(
-    #     task_id="process_table",
-    #     python_callable=_create_tables_process,
+    process_table = PythonOperator(
+        task_id="process_table",
+        python_callable=_create_tables_process,
        
-    # )
+    )
 
-     #create_Redshift first 
-    # [get_files, create_Redshift] >> con_upload_to_s3 >> process_table#>> _s3_transform_with_spark 
+    
+    
 
-    #create_Redshift >> sleep for 5 min >> create_table 
+    # get_files >> con_upload_to_s3 >> create_Redshift >> cluster_sensor >> process_table
+    # get_files >> con_upload_to_s3 >> cluster_sensor
 
-    # get_files >> con_upload_to_s3 >> create_Redshift >> cluster_sensor
-    get_files >> con_upload_to_s3 >> cluster_sensor
+
+    #xcom respond cluster to cluster_sensor and process_table to use endpoint and clustername
+    create_Redshift >> get_files >> con_upload_to_s3 >> cluster_sensor >> process_table
+    
