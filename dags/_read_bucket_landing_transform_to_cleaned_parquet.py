@@ -54,8 +54,8 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     # print(pets_df.drop(columns=["Name"]))
 
     # clean and transform to parquet
-    pets_key_pq = "Pets.csv"
-    owners_key_pq = "Owners.csv"
+    pets_key_pq = "pets.csv"
+    owners_key_pq = "owners.csv"
     pdetail_key_pq = "pdetails.csv"
     phistory_key_pq = "phistory.csv"
 

@@ -12,6 +12,7 @@ from _create_tables_process import _create_tables_process
 from _read_bucket_landing_transform_to_cleaned_parquet import _read_bucket_landing_transform_to_cleaned_parquet
 from _describe_cluster import _describe_cluster
 from _insert_data import _insert_data
+from _insert_data_parquet import _insert_data_parquet
 
 from airflow import DAG
 from airflow.utils import timezone
@@ -25,7 +26,7 @@ from airflow.providers.amazon.aws.sensors.redshift_cluster import RedshiftCluste
 # REDSHIFT_CLUSTER_IDENTIFIER = getenv("REDSHIFT_CLUSTER_IDENTIFIER", "redshift-cluster-1")
 
 with DAG (
-    "elt",
+    "elt_parquet",
     start_date=timezone.datetime(2022, 12, 16),
     schedule="@daily", # use cron " * * * * *"
     tags=["workshop"],
@@ -40,11 +41,11 @@ with DAG (
         }
     )
 
-    create_Redshift = PythonOperator(
-        task_id="create_Redshift",
-        python_callable=_create_Redshift,
+    # create_Redshift = PythonOperator(
+    #     task_id="create_Redshift",
+    #     python_callable=_create_Redshift,
         
-    )
+    # )
   
     con_upload_to_s3 = PythonOperator(
         task_id="con_upload_to_s3",
@@ -85,21 +86,17 @@ with DAG (
        
     )
 
-    insert_data = PythonOperator(
-        task_id="insert_data",
-        python_callable=_insert_data,
+    # insert_data = PythonOperator(
+    #     task_id="insert_data",
+    #     python_callable=_insert_data,
+       
+    # )
+
+    insert_data_parquet = PythonOperator(
+        task_id="insert_data_parquet",
+        python_callable=_insert_data_parquet,
        
     )
-
-    
-    
-
-    # get_files >> con_upload_to_s3 >> create_Redshift >> cluster_sensor >> process_table
-    # get_files >> con_upload_to_s3 >> cluster_sensor
-
-
-    #xcom respond cluster to cluster_sensor and process_table to use endpoint and clustername
-    # create_Redshift >> get_files >> con_upload_to_s3 >> read_transform_parquet >> cluster_sensor >> process_table
-    
-    create_Redshift >> wait_for_cluster >> describe_cluster >> create_tables_process >> insert_data
-    get_files >> con_upload_to_s3 >> read_transform_parquet >> wait_for_cluster
+      
+    get_files >> con_upload_to_s3 >> read_transform_parquet >> wait_for_cluster >> describe_cluster >> create_tables_process >> insert_data_parquet
+    # create_Redshift >> wait_for_cluster 

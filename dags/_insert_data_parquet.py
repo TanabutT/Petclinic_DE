@@ -2,10 +2,10 @@ import psycopg2
 import boto3
 # separate sql queries in another file
 # import the sql queries below:
-from sql_queries import *
+from sql_insert_parquet import loadinto_table_queries
 from settings_dags import *
 
-def _insert_data(**context):
+def _insert_data_parquet(**context):
 
     # print("try connect to postgresdb")
 

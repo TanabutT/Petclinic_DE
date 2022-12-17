@@ -3,7 +3,7 @@ import pickle
 from datetime import datetime
 from settings_dags import * 
 
-def _describe_cluster(**context):
+def _describe_cluster():
         client = boto3.client('redshift',
 
                                 region_name='us-east-1',
@@ -11,12 +11,12 @@ def _describe_cluster(**context):
                                 aws_secret_access_key=aws_secret_access_key,
                                 aws_session_token=aws_session_token)
 
-        ti = context["ti"]
-        # Get list of files from filepath
-        ClusterIdentifier = ti.xcom_pull(task_ids="create_Redshift", key="return_value")
-        # print("ClusterIdentifier to  fill in response: ", ClusterIdentifier)
+        # ti = context["ti"]
+        # # Get list of files from filepath
+        # ClusterIdentifier = ti.xcom_pull(task_ids="create_Redshift", key="return_value")
+        # # print("ClusterIdentifier to  fill in response: ", ClusterIdentifier)
         """ClusterIdentifier will return "redshift-cluster-petclinic" that we name when create cluster"""
-
+        ClusterIdentifier = "redshift-cluster-petclinic"
         response = client.describe_clusters(ClusterIdentifier=ClusterIdentifier, MaxRecords=100,)
         ClusterEndpoint = response['Clusters'][0]['Endpoint']['Address']
         print("ClusterIdentifier :" ,
