@@ -24,8 +24,15 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```sh
 docker-compose up -d
 ```
-
-
+### Access AWS cli
+* FIrst of all get:
+  - aws_access_key_id = "xxxxxxxxxxxxxxxxxx"
+  - aws_secret_access_key = "xxxxxxxxxxxxxxxxxx"
+  - aws_session_token = "xxxxxxxxxxxxxxxxxx"
+with the command here
+```sh 
+cat ~/.aws/credentials
+```
 
 ### create AWS S3
 
@@ -45,7 +52,7 @@ cat ~/.aws/credentials
  ลงไป เราจะได้ค่าทั้ง 3 ค่าที่เราต้องการมา 
  * cuation! ค่า สามค่านี้ เปลี่ยนทุกๆ กี่ชั่วโมงไม่ทราบแน่ชัดเช็คจาก AWS cli เมื่อ connect ไม่ได้ 
 
-### upload csv files to bucket
+### upload csv files to bucket using airflow schedule data flow pipeline
 * create directory in bucket for csv files in "Petclinic_landing" directory 
   - Pets
   - Owners
@@ -161,37 +168,100 @@ COPY owners FROM 's3://v/owners.parquet'
 	SESSION_TOKEN ''
 	FORMAT AS PARQUET
 ```
+หลัง run จะเป็นการ drop table , create table , and load data into table พร้อมที่จะทำการ ต่อกับ dbt ต่อไป
+
+![cluster-loaded with table from parquet file in S3](./resource/drop-create-loadinto-cluster.png)
 
 
 
 
+## dbt connect with redshift
+### install dbt core and dbt redshift
+```sh
+pip install dbt-core dbt-redshift
+```
+### start dbt project connect with redshift cluster
+```sh
+dbt init
+```
+- ตั้งชื่อ project = dbt_connect_redshift
+- choose number to pick redshift
+- hostname ใช้ endpoint redshift cluster ตัด ตัวหลัง .com ออก (ที่เป็น port กับชื่อ database name)
+- port default 5439 ถ้าเปลี่ยนก็พิมพ์ตามที่ตั้ง
+ี- user ของ cluster 
+- password ใส่ของ cluster
+- dbname ดูใน cluster detail เลย ที่นี้ ชื่อ petclinic
+- schema ดูหน้า query ชื่อ public  
 
-![AWS Redshift query console](resource/redshift_jsonpaht0.jpg)
-
-## insert data from json with json_path
+สำเร็จจะขึ้นแบบนี้  
 
 ```sh
-copy github_event
-from 's3://tanabruce-bucket06092022/github_events_01.json'
-iam_role 'arn:aws:iam::423544405765:role/LabRole' 
-json 's3://tanabruce-bucket06092022/events_json_path.json';
+Your new dbt project "dbt_connect_redshift" was created!
+Happy modeling!
 ```
-
-To show data in table github_event:
+และจะสร้าง ตัว folder ชื่อ dbt project ที่เราตั้งไปตะกี้
+ลองเข้าไปที่ dbt profile นั้น (ซึ่งจะสร้างครอบอยู่นอก  workspace directory ของตัว project Petclinic_DE เลย) เพราะ ~/ เป็นการออกไป home directory แล้วเข้า folder .dbt ที่เก็บ profile.yml อยู่
 
 ```sh
-select * from github_event
+code ~/.dbt/profiles.yml
 ```
-see the result in 
-[github_event_query_result.csv](github_event_query_result.csv)
+ลงมาล่างสุดดู รายละเอียดการ connection ต่อกับ redshift  
 
-example result
-| event_id	  |   event_type      |actor_login  |	repo_name	                    | created_at           |
-| :---        |   :---            |:---:        |:---:                          | ---:                 |
-|23487929637  |	IssueCommentEvent	|  sukhada	  |350org/ak_intl_v3	            | 2022-08-17T15:51:05Z |
-|23487929676	|PushEvent	        |  yousabu	  |yousabu/ansible_rhce	          | 2022-08-17T15:51:05Z |
-|23487929674	|PushEvent	        |  MathisGD	  |morpho-dao/morpho-utils        |	2022-08-17T15:51:05Z |
-|23487929661	|PushEvent	        |  BR-Junior	|BR-Junior/crud-com-vue-e-quasar|2022-08-17T15:51:05Z  |
+
+* ต่อมาต้องเข้าไปที่ folder dbt project ที่ทำไว้แล้ว 
+```sh
+cd dbt_connect_redshift
+```
+
+แล้วลอง run dbt debug ทดสอบว่า ระบบต่างๆ dbt ok (file dbt_project.yml ok มั้ย และ file profiles.yml ok หรือไม่)
+```sh
+dbt debug 
+```
+ถ้าผ่านจะขึ้นแบบนี้
+![dbt debug passed](./resource/dbt_debug_in_folder_pass.png)
+
+### build new model in dbt
+go in by click into dbt_connect_redshift/model/ folder 
+* create new sql file for new query or make staging table from existing table in cluster
+  - try stg_pet.sql
+    ```sh 
+    select * from pets
+    ```
+* when new sql files are made run (dbt will build the new table table)
+```sh
+dbt run 
+```
+* go check (view) table or table depend on config dbt in the cluster query page in redshift cluster
+![myfirstdbtmodel-and-stg_pets-new-model-create](./resource/dbt_run_stg_pest_created_N_query.png)
+from pic here see stg_pets myfirstdbtmodel mysecondbtmodel are there  
+query form stg_pets and run success too.  
+
+
+### relationship from dbt
+เมื่อลองทำ datawarehouse และ staging table ไว้ใช้งานแล้ว สามารถสร้าง docs ไว้ได้ 
+สร้าง doc ใน dbt จากคำสั่ง 
+
+```sh
+dbt docs generate
+```
+และ run  
+
+```sh
+dbt docs serve --port 8089
+```
+
+ไปกดที่ขวาล่าง สามารถดู lineage graph ของ datawarehouse ของเราได้
+
+![dbt_docs_serve_page>localhost:8080](./resource/dbt_docs_serve_page.png)
+![page>lineage_graph](./resource/lineage_graph_example_nomodel.png)
+
+
+
+
+
+
+
+
 
 To close all service
 - S3 empty bucket
