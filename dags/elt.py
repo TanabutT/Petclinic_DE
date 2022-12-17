@@ -8,6 +8,7 @@ from _con_upload_to_s3 import _con_upload_to_s3
 from _s3_transform_with_spark import _s3_transform_with_spark
 from _create_Redshift import _create_Redshift
 from _create_tables import _create_tables_process
+from _read_bucket_landing_transform_to_cleaned_parquet import _read_bucket_landing_transform_to_cleaned_parquet
 
 from airflow import DAG
 from airflow.utils import timezone
@@ -44,6 +45,11 @@ with DAG (
         python_callable=_con_upload_to_s3,
     )
 
+    read_transform_parquet = PythonOperator(
+        task_id="read_bucket_landing_transform_to_cleaned_parquet",
+        python_callable=_read_bucket_landing_transform_to_cleaned_parquet,
+    )
+
     # s3_transform_with_spark = PythonOperator(
     #     task_id="s3_transform_with_spark",
     #     python_callable=_s3_transform_with_spark,
@@ -72,5 +78,7 @@ with DAG (
 
 
     #xcom respond cluster to cluster_sensor and process_table to use endpoint and clustername
-    create_Redshift >> get_files >> con_upload_to_s3 >> cluster_sensor >> process_table
+    # create_Redshift >> get_files >> con_upload_to_s3 >> read_transform_parquet >> cluster_sensor >> process_table
     
+    create_Redshift >> cluster_sensor >> process_table
+    get_files >> con_upload_to_s3 >> read_transform_parquet >> cluster_sensor >> process_table
