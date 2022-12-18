@@ -1,5 +1,5 @@
 import os
-
+import fsspec
 import pandas as pd
 from settings import aws_access_key_id , aws_secret_access_key , aws_session_token
 
@@ -13,7 +13,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     phistory_key = "P9-ProceduresHistory1.csv"
 
     pets_df = pd.read_csv(
-        f"s3://{AWS_S3_BUCKET}/{pets_key}",
+        f"s3a://{AWS_S3_BUCKET}/{pets_key}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
@@ -23,7 +23,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     )
 
     owners_df = pd.read_csv(
-        f"s3://{AWS_S3_BUCKET}/{owners_key}",
+        f"s3a://{AWS_S3_BUCKET}/{owners_key}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
@@ -33,7 +33,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     )
 
     pdetail_df = pd.read_csv(
-        f"s3://{AWS_S3_BUCKET}/{pdetail_key}",
+        f"s3a://{AWS_S3_BUCKET}/{pdetail_key}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
@@ -43,7 +43,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
     )
 
     phistory_df = pd.read_csv(
-        f"s3://{AWS_S3_BUCKET}/{phistory_key}",
+        f"s3a://{AWS_S3_BUCKET}/{phistory_key}",
         storage_options={
             "key": aws_access_key_id,
             "secret": aws_secret_access_key,
