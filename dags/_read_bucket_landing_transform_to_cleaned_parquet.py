@@ -19,7 +19,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },
-        skiprows=1,
+        header=0,
     )
 
     owners_df = pd.read_csv(
@@ -29,7 +29,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },
-        skiprows=1,
+        header=0,
     )
 
     pdetail_df = pd.read_csv(
@@ -39,7 +39,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },
-        skiprows=1,
+        header=0,
     )
 
     phistory_df = pd.read_csv(
@@ -49,7 +49,7 @@ def _read_bucket_landing_transform_to_cleaned_parquet():
             "secret": aws_secret_access_key,
             "token": aws_session_token,
         },
-        skiprows=1,
+        header=0,
     )
     # print(pets_df.drop(columns=["Name"]))
 
