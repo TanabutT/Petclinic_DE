@@ -1,7 +1,7 @@
 import os
 
 import pandas as pd
-from settings_dags import aws_access_key_id , aws_secret_access_key , aws_session_token
+from settings import aws_access_key_id , aws_secret_access_key , aws_session_token
 
 def _read_bucket_landing_transform_to_cleaned_parquet(): 
 
